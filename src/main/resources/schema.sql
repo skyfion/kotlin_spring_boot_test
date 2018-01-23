@@ -5,7 +5,17 @@ CREATE TABLE IF NOT EXISTS documents (
   name VARCHAR(115),
   index VARCHAR(115),
   parent INT,
-  foreign key (parent) references documents(id) ON UPDATE CASCADE ON DELETE CASCADE
+  foreign key (parent) references documents(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS attributes (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(115),
+  type VARCHAR(115),
+  value VARCHAR(115),
+  value_int INT,
+  doc_id INT NOT NULL,
+  foreign key (doc_id) references documents(id) ON DELETE CASCADE
 );
 
 -- test records

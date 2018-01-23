@@ -1,5 +1,7 @@
 package org.redapple.docs.controller
 
+import org.redapple.docs.model.Attribute
+import org.redapple.docs.model.AttributeDao
 import org.redapple.docs.model.Document
 import org.redapple.docs.model.DocumentDao
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
 @EnableAutoConfiguration
-class Controller @Autowired constructor(val docDao: DocumentDao){
+class Controller @Autowired constructor(val docDao: DocumentDao, val aDao: AttributeDao) {
     @GetMapping("/")
     fun indexAction(model: Model): String {
         model.addAttribute("documents", docDao.findAllRoot())
@@ -22,7 +24,7 @@ class Controller @Autowired constructor(val docDao: DocumentDao){
 
     @PostMapping("add")
     fun add(@ModelAttribute document: Document): String {
-        docDao.insert(document)
+        docDao.save(document)
         if (document.parent != null)
             return "redirect:/enter?id=" + document.parent
         return "redirect:/"
@@ -52,9 +54,36 @@ class Controller @Autowired constructor(val docDao: DocumentDao){
         }
         return "doc_edit"
     }
-//    @GetMapping("/add")
-//    fun add(model: Model, @RequestParam(value = "root", required = false, defaultValue = "-1") root: Long): String {
-////        docDao.insert(Document(parent = id))
-//        return "redirect:/"
-//    }
+
+    @GetMapping("/attributes")
+    fun attributes(model: Model, @RequestParam(value = "id", required = true) docId: Long): String {
+        model.addAttribute("attributes", aDao.findAttributes(docId))
+        model.addAttribute("docId", docId)
+        return "attributes"
+    }
+
+    @GetMapping("/attributes/add")
+    fun addAttribute(model: Model, @RequestParam(value = "docId", required = true) docId: Long): String {
+        model.addAttribute("docId", docId)
+        return "attr_edit"
+    }
+
+    @GetMapping("/attribute/delete")
+    fun deleteAttribute(@RequestParam(value = "id", required = true) id: Long,
+                        @RequestParam(value = "docId", required = true) docId: Long): String {
+        aDao.delete(id)
+        return "redirect:/attributes?id=" + docId
+    }
+
+    @GetMapping("/attribute/edit")
+    fun editAttribute(model: Model, @RequestParam(value = "id", required = true) id: Long): String {
+        model.addAttribute("attribute", aDao.find(id))
+        return "attr_edit"
+    }
+
+    @PostMapping("/attribute/save")
+    fun saveAttribute(@ModelAttribute attribute: Attribute): String {
+        aDao.save(attribute)
+        return "redirect:/attributes?id=" + attribute.docId
+    }
 }

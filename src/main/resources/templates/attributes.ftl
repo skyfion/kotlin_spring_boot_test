@@ -2,7 +2,7 @@
 
 <#macro page_body>
 <div class="container">
-    <div> <a href="/add" role="button" class="btn btn-primary">Add attribute</a></div>
+     <a href="/attributes/add?docId=${docId}" role="button" class="btn btn-primary">Add attribute</a>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -10,7 +10,7 @@
             <th>name</th>
             <th>type</th>
             <th>value</th>
-            <th>value_int</th>
+            <th>value int</th>
             <th></th>
             <th></th>
         </tr>
@@ -23,9 +23,9 @@
             <td>${atr.name!}</td>
             <td>${atr.type!}</td>
             <td>${atr.value!}</td>
-            <td>${atr.value_int!}</td>
-            <td><a href="/edit?id=${atr.id}" role="button" class="btn-primary">edit</a></td>
-            <td><a href="/delete?id=${atr.id}" role="button" class="btn-danger">delete</a></td>
+            <td>${atr.valueInt!}</td>
+            <td><a href="/attribute/edit?id=${atr.id}" role="button" class="btn-primary">edit</a></td>
+            <td><a href="/attribute/delete?id=${atr.id}&docId=${atr.docId}" role="button" class="btn-danger">delete</a></td>
         </tr>
         </#list>
     </#if>

@@ -3,9 +3,9 @@
 
 <#macro page_body>
     <#if root??>
-        <div> <a href="/edit?root=${root}" role="button" class="btn btn-primary">add</a> </div>
+        <a href="/edit?root=${root}" role="button" class="btn btn-primary">add</a>
     <#else>
-        <div> <a href="/edit" role="button" class="btn btn-primary">add root</a> </div>
+        <a href="/edit" role="button" class="btn btn-primary">add root</a>
     </#if>
     <div class="container">
         <table class="table table-striped">

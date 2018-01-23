@@ -79,6 +79,13 @@
             <artifactId>spring-transaction</artifactId>
             <version>0.9.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -115,7 +122,7 @@
                 <version>${spring.version}</version>
                 <!--<configuration>-->
                     <!--<jvmArguments>-->
-                        <!-- -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005-->
+                          <!-- -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005-->
                     <!--</jvmArguments>-->
                 <!--</configuration>-->
                 <dependencies>
