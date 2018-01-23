@@ -9,6 +9,7 @@ Required! maven, java 8
 ``
 mvn spring-boot:run
 ``  
+use http://localhost:8080/
 
 run tests  
 ``
@@ -16,4 +17,4 @@ mvn test
 ``
 
 
-todo http://maxazan.github.io/jquery-treegrid/
+todo may by http://maxazan.github.io/jquery-treegrid/
